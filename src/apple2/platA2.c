@@ -215,10 +215,14 @@ void plat_DrawSquare(char position)
     if(piece)
     {
         rop = blackWhite ? ROP_INV : ROP_CPY;
-        inv = blackWhite ^ (piece & PIECE_WHITE) != 0;
+        inv = blackWhite ^ !((piece & PIECE_WHITE) != 0);
     }
     else
+    {
         rop = blackWhite ? ROP_WHITE : ROP_BLACK;
+        inv = 0;
+        piece = 1;
+    }
 
     hires_Draw(2+x*BOARD_PIECE_WIDTH,14+y*BOARD_PIECE_HEIGHT,
                BOARD_PIECE_WIDTH,BOARD_PIECE_HEIGHT,rop,
